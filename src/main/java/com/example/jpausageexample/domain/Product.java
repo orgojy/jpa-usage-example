@@ -24,6 +24,10 @@ public class Product {
     protected Product() {
     }
 
+    public void changePrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }
