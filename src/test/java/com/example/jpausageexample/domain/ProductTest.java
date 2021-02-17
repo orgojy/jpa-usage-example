@@ -14,22 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 class ProductTest {
     @Autowired
-    private TestEntityManager entityManager;
-    @Autowired
     private ProductRepository productRepository;
-
-    @Test
-    void persistTestWithEntityManager() {
-        // given
-        Product product = new Product("Apple", BigDecimal.valueOf(1_000));
-        product = entityManager.persist(product);
-
-        // when
-        Product savedProduct = entityManager.find(Product.class, product.getId());
-
-        // then
-        assertThat(savedProduct).isEqualTo(product);
-    }
 
     @Test
     void saveTestWithoutTransaction() {
