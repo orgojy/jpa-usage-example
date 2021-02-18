@@ -26,4 +26,17 @@ class EntityManagerTest {
         // then
         assertThat(savedProduct).isEqualTo(product);
     }
+
+    @Test
+    void findTestWithEntityManager() {
+        // given
+        Product product = new Product("Apple", BigDecimal.valueOf(1_000));
+        product = entityManager.persist(product);
+
+        // when
+        Product findProduct = entityManager.find(Product.class, product.getId());
+
+        // then
+        assertThat(findProduct).isEqualTo(product);
+    }
 }
