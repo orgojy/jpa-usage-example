@@ -1,5 +1,6 @@
 package com.example.jpausageexample.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -38,5 +39,20 @@ class EntityManagerTest {
 
         // then
         assertThat(findProduct).isEqualTo(product);
+    }
+
+    @Test
+    void removeTestWithEntityManager() {
+        // given
+        Product product = new Product("Apple", BigDecimal.valueOf(1_000));
+        product = entityManager.persist(product);
+
+        // when
+        long productId = product.getId();
+        entityManager.remove(product);
+        Product removedProduct = entityManager.find(Product.class, productId);
+
+        // then
+        assertThat(removedProduct).isNull();
     }
 }
